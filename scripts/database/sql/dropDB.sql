@@ -1,0 +1,2 @@
+-- DROP DBSEDENA
+DROP DATABASE IF EXISTS dbromerario;

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+PGPOOL_PORT=9898
+PGPOOL_IP=172.20.53.170
+PGPOOL_USER=pgpool
+PGPOOL_USERPASS=pgpool
+PGPOOL_PATH="/usr/bin"
+PGPOOL_PROCESS=pgpool
+PGPOOL_PID_DIR=/var/pgpool/pid
+PGPOOL_LOCKFILE_DIR=/var/lock/subsys
+PGPOOL_CONF=${PGCONFIG}/pgpool/pgpool.conf
+PGPOOL_PCPCONF=${PGCONFIG}/pgpool/pcp.conf
+PGPOOL_HBACONF=${PGCONFIG}/pgpool/pool_hba.conf
+PGPOOL_SOCKET_DIR=/tmp/.s
+PGPOOL_EXTENSION_DIR=${PGCONFIG}/pgpool_ext
+PGPOOL_RUN_DIR=/var/run/pgpool
+# Options for pgpool(Added -D by ROMERARIO TEAM)
+# -n: don't run in daemon mode does not detatch control tty
+# -d: debug mode. lots of debug information will be printed
+# -D: restart mode. restart pgpool instance every time you reset
+#Debug mode PGPOOL_OPTS=" -d -n -D"
+PGPOOL_OPTS=" -n -D"
+#Added new file for pgpool 4.4 memcache lock implementation
+PGPOOL_MEMQ_FILE=${PGPOOL_LOG_DIR}/memq_lock_file
+PGPOOL_STATUS_FILE=${PGPOOL_RUN_DIR}/pgpool_status
+PGPOOL_WAIT_START_TIME=10
+PGPOOL_FLAG_FILE="/opt/Postgresql/data/first_start.flag"
+PGPOOL_ATTACH_NODE_MAX_REINTENTOS=5
+PGPOOL_ATTACH_NODE_MAX_SECONDS_TRY=5

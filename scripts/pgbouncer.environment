@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PGBOUNCER_PORT=5432
+PGBOUNCER_PATH="/usr/bin"
+PGBOUNCER_PROCESS=pgbouncer
+PGBOUNCER_RUN_DIR=/var/run/pgbouncer
+PGBOUNCER_PID_DIR=${PGBOUNCER_RUN_DIR}/pid
+PGBOUNCER_CONF=${PGCONFIG}/pgbouncer/config/pgbouncer.ini
+PGBOUNCER_SOCKET_DIR=/tmp/.s
+

@@ -1,0 +1,54 @@
+#!/bin/bash
+
+#PGCONFIG PGCONFFILEDIR y PGSCRIPTSDIR son NO MODIFICABLES solo defininicion
+PGHOME="/opt/Postgresql"
+
+PGCONFIG=${PGHOME}/config
+PGCONFFILEDIR=${PGCONFIG}/conf
+PGSCRIPTSDIR=${PGCONFIG}/scripts
+PGDATA=${PGHOME}/data
+PGWALDIR=${BACKUP_WAL_DIR}
+
+#-------------------- DATABASE VARIABLE
+DBNAME_ADMIN=postgres
+USERDB_ADMIN=postgres
+PASSUSERDB_ADMIN=postgres
+USERDB=admc2cdb
+PASSUSERDB=admc2cdb
+DBNAME=dbc2cdb
+DBSCHEMA_BASE_FILE=dbSchema.sql
+DB_SCHEMA=c2cdb
+TABLESPACE_NAME=c2cdb
+PASSFILE=/home/postgres/.pgpass
+CLUSTER_USER_REPLICATOR=replicator_bbdd
+CLUSTER_USER_REPLICATORPASS=replicator_bbdd
+
+#------------------ Scripts database creation and manage
+DBCREATION_FILE_ROLES=createDBRolTableSpace.sql
+DBCREATION_FILE_INIT=initVars.sql
+DBCREATION_FILE_DB=createDBSimple.sql
+DBDROP_FILE_DB=dropDB.sql
+DBPRELOAD_DATA_FILE=preload_postgres_data.sh
+DBDDL_INIT_FILE=preload_postgres_ddl.sh
+DBDML_INIT_FILE=preload_postgres_dml.sh
+
+#-------------- DIRECTORIES AND LIBS CONSTANTS
+PGSERVICES_DIR=${PGCONFIG}/services
+TABLESPACE_DIR=${PGHOME}/${TABLESPACE_NAME}
+PATH=${PGHOME}/bin:$PATH
+MANPATH=$MANPATH:${PGHOME}/share/man
+LD_LIBRARY_PATH=${PGHOME}/lib:$LD_LIBRARY_PATH
+PGLIB=${PGHOME}/lib
+PGEXTENSION=${PGHOME}/share/postgresql/extension
+# Variables postgresql.service
+PG_OOM_ADJUST_FILE=/proc/self/oom_score_adj
+PG_OOM_ADJUST_VALUE=0
+# Maximum number of seconds pg_ctl will wait for postgres to start.
+# Note that PGSTARTTIMEOUT should be less than TimeoutSec value on the postgresql.service
+PGSTARTTIMEOUT=90
+## Get PostgreSQL version
+PGVERSION=$(${PGHOME}/bin/initdb -V | awk '{print $3}' | sed 's/\..*//' | sed 's/\([0-9]*\)[a-zA-Z].*/\1/')
+
+#-------------- RECOVERY FILES
+RECOVERYCONF=${PGDATA}/postgresql.auto.conf
+SIGNALFILE=${PGDATA}/standby.signal

@@ -1,0 +1,53 @@
+#!/bin/bash
+
+#Header base environment
+. /opt/Postgresql/config/scripts/postgresql.environment
+
+#Header pgpool environment
+. /opt/Postgresql/config/scripts/pgpool.environment
+
+#Header pgbouncer environment
+. /opt/Postgresql/config/scripts/pgbouncer.environment
+
+
+#--------------------------- CLUSTER ROMERARIO VARIABLES  ---------------
+CLUSTER_MASTER_FILE=/mnt/cluster/clustermasterip.txt
+CLUSTER_MASTER_DEFAULT=192.168.100.5
+CLUSTER_MASTER_WAITS_SECS=10
+CLUSTER_MASTER_WAITS_TIMES=5
+CLUSTER_DNS=192.168.100.11
+#IP virtual de pgpool
+CLUSTERIP=192.168.100.11
+CLUSTER_PORT=6432
+CLUSTER_HOSTS=("192.168.100.5" "192.168.100.6" "192.168.100.9")
+NODE_PORT=16432
+DEVICE_ETH=ens160
+CLUSTER_PARENT=$( /usr/bin/cat ${CLUSTER_MASTER_FILE} )
+IP_NODE=$( ip a | grep ${DEVICE_ETH} | grep inet | head -1 | sed 's/\:/ /' | awk '{print $2}' | sed 's-/.*--g' )
+
+#---------------- USERS AND SSH CONFIG
+USER_SO=c2cdb
+PGUSER_SO=postgres
+SSHUSER=${PGUSER_SO}
+SSHFILE=/home/${PGUSER_SO}/.ssh/id_rsa
+
+#-------------- SERVICES
+PGPOOL_SERVICE=/usr/lib/systemd/system/pgpool.service
+POSTGRES_SERVICE=/usr/lib/systemd/system/postgresql.service
+PGBACKREST_SERVICE=/etc/init.d/pgbackrest
+PGBOUNCER_SERVICE=/usr/lib/systemd/system/pgbouncer.service
+
+#-------------- LOGS CONFIGURATION
+BASE_LOG_DIR=/var/log
+DB_LOG_DIR=${BASE_LOG_DIR}/postgresql
+DB_LOG=${DB_LOG_DIR}/postgresql.log
+PGPOOL_LOG_DIR=${BASE_LOG_DIR}/pgpool
+PGPOOL_LOG=${PGPOOL_LOG_DIR}/pgpool.log
+PGBOUNCER_LOG_DIR=${BASE_LOG_DIR}/pgbouncer
+PGBOUNCER_LOG=${PGBOUNCER_LOG_DIR}/pgbouncer.log
+PGBACKREST_LOG_DIR=${BASE_LOG_DIR}/pgbackrest
+
+#--------------- BACKUPS CONFIG
+BACKUP_WAL_DIR=/mnt/cluster/walfiles
+BACKUP_DB_DIR=/mnt/backup
+PGBACKREST_STANZA=c2cdb

@@ -1,0 +1,4 @@
+admc2cdb:admc2cdb
+postgres:postgres
+replicator_bbdd:replicator_bbdd
+pgpool:pgpool

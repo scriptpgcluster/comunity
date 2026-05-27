@@ -1,2 +1,0 @@
-"admc2cdb" "admc2cdb"
-"postgres" "postgres"

@@ -1,8 +1,8 @@
 -- Create roles and tableSpace
 
-CREATE ROLE admea LOGIN PASSWORD 'admin' SUPERUSER NOINHERIT CREATEDB;
+CREATE ROLE admin LOGIN PASSWORD 'admin' SUPERUSER NOINHERIT CREATEDB;
 CREATE TABLESPACE admintable OWNER postgres LOCATION '/opt/Postgresql/admintable';
-GRANT CREATE ON TABLESPACE ea1 TO admin;
+GRANT CREATE ON TABLESPACE admintable TO admin;
 CREATE ROLE replicator_bbdd LOGIN REPLICATION ENCRYPTED PASSWORD 'replicator_bbdd';
 GRANT pg_monitor TO replicator_bbdd;
 GRANT pg_read_server_files TO replicator_bbdd;

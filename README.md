@@ -1,5 +1,12 @@
-# comunity
-Comunity Version
+# SCRIPT PG CLUSTER: http://www.scriptpgcluster.com
+Scriptpgcluster is a scalable solution adaptable to your business needs. The Community solution is designed for small businesses that require powerful databases at a low price with professional performance.
+
+Scriptpgcluster offers other businesses more powerful solutions adapted to more demanding environments, always within a fully standardized framework.
+
+Contact us via our website at http://www.scriptpgcluster.com or via email at scriptpgcluster@gmail.com, and a sales representative will send you a quote for our product.
+
+
+# Comunity Version
 It is the file where all the variables that affect and define the cluster are defined. Mapped drives, shared files, node IPs… We detail each of the variables in this file:
 
 • CLUSTER_MASTER_FILE=/mnt/cluster/clustermasterip.txt (Example)
